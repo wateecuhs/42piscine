@@ -6,12 +6,13 @@
 /*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:10:36 by panger            #+#    #+#             */
-/*   Updated: 2023/08/25 10:01:41 by panger           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:14:43 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
+#include "ft.h"
 
 int		ft_strlen(char *str);
 void	ft_putchar(char c);
@@ -40,7 +41,6 @@ void	ft_putstr_hexa(unsigned char *str, unsigned int size, unsigned int len)
 		ft_putchar(base[(unsigned char)str[i + 1] % 16]);
 		ft_putchar(base[(unsigned char)str[i] / 16]);
 		ft_putchar(base[(unsigned char)str[i] % 16]);
-		fflush(stdout);
 		count += 4;
 		i += 2;
 		if (i % 2 == 0 && i != 16)
@@ -76,25 +76,35 @@ void	ft_putadr_hexa(unsigned long adr)
 	write(1, tab, 7);
 }
 
+void	dump_loop(unsigned char *str, unsigned int *len,
+	unsigned int size, int stdinval)
+{
+	if (stdinval != -1)
+	{
+		ft_putadr_hexa(stdinval);
+		stdinval += 16;
+	}
+	else
+		ft_putadr_hexa((unsigned long)&str[*len] - (unsigned long)&str[0]);
+	write(1, " ", 1);
+	ft_putstr_hexa((unsigned char *)&str[*len], size, *len);
+	*len += 16;
+}
+
 char	*ft_hexdump(void *adr, unsigned int size, int stdinval)
 {
 	unsigned int	len;
 	unsigned char	*str;
+	int				combo;
 
 	len = 0;
+	combo = 0;
 	str = (unsigned char *)adr;
 	while (len < size)
 	{
-		if (stdinval != -1)
-		{
-			ft_putadr_hexa(stdinval);
-			stdinval += 16;
-		}
-		else
-			ft_putadr_hexa((unsigned long)&str[len] - (unsigned long)&str[0]);
-		write(1, " ", 1);
-		ft_putstr_hexa((unsigned char *)&str[len], size, len);
-		len += 16;
+		if (combo_checker(str, &len, size, &combo) == 0)
+			continue ;
+		dump_loop(str, &len, size, stdinval);
 	}
 	if (stdinval == -1)
 	{

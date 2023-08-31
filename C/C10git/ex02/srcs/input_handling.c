@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:06:27 by panger            #+#    #+#             */
-/*   Updated: 2023/08/25 12:35:48 by panger           ###   ########.fr       */
+/*   Updated: 2023/08/31 16:46:32 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,15 @@ int	get_bytes2(char **argv, int *i, int argc)
 	*i = *i + 1;
 	if (*i == argc)
 	{
-		ft_putstr("tail: option requires an argument -- 'c'\n");
+		ft_putstr_var("#: option requires an argument -- 'c'\n", argv[0]);
 		ft_putstr("Try 'tail --help' for more information.\n");
 		return (-1);
 	}
 	bytes = read_input_value(argv[*i]);
 	if (bytes == -1)
 	{
-		ft_putstr_var("tail : invalid number of bytes: '#'\n", argv[*i]);
+		ft_putstr(argv[0]);
+		ft_putstr_var(": invalid number of bytes: '#'\n", argv[*i]);
 		return (bytes);
 	}
 	return (bytes);
@@ -70,7 +71,8 @@ int	get_byte(char **argv, int *i, int argc)
 		bytes = read_input_value(&argv[*i][2]);
 		if (bytes == -1)
 		{
-			ft_putstr_var("tail : invalid number of bytes: '#'\n", &argv[*i][2]);
+			ft_putstr(argv[0]);
+			ft_putstr_var(": invalid number of bytes: '#'\n", &argv[*i][2]);
 			return (bytes);
 		}
 	}
@@ -98,9 +100,7 @@ int	read_input_bytes(int argc, char **argv)
 		{
 			bytes = get_byte(argv, &i, argc);
 			if (bytes == -1)
-			{
 				return (bytes);
-			}
 		}
 		else
 			files_taken += 1;

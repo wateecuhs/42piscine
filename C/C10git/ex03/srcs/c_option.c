@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:10:38 by panger            #+#    #+#             */
-/*   Updated: 2023/08/25 10:02:36 by panger           ###   ########.fr       */
+/*   Updated: 2023/08/31 16:47:06 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,17 @@ void	print_loop(int len, unsigned int size, unsigned char *str)
 void	loop_dump(unsigned char *str, int len, int size, int *stdinval)
 {
 	if (*stdinval != -1)
-		ft_putadr_hexa_c(*stdinval);
+	{
+		ft_putadr_hexa(*stdinval);
+	}
 	else
-		ft_putadr_hexa_c((unsigned long)&str[len] - (unsigned long)&str[0]);
-	write(1, " ", 1);
+		ft_putadr_hexa((unsigned long)&str[len] - (unsigned long)&str[0]);
+	write(1, "  ", 2);
 	ft_putstr_hexa_c((unsigned char *)&str[len], size, len);
 	write(1, "|", 1);
 	print_loop(len, size, str);
 	write(1, "|", 1);
 	ft_putchar('\n');
-	*stdinval += 16;
 }
 
 void	*ft_hexdump_c(void *adr, unsigned int size, int c, int stdinval)
@@ -82,22 +83,25 @@ void	*ft_hexdump_c(void *adr, unsigned int size, int c, int stdinval)
 	unsigned int	len;
 	unsigned char	*str;
 	int				loop_count;
+	int				combo;
 
 	len = 0;
+	combo = 0;
 	str = (unsigned char *)adr;
 	while (len < size)
 	{
+		if (combo_checker(str, &len, size, &combo) == 0)
+			continue ;
 		loop_count = 0;
-		while (loop_count < c)
-		{
+		while (loop_count++ < c)
 			loop_dump(str, len, size, &stdinval);
-			loop_count++;
-		}
+		if (stdinval != -1)
+			stdinval += 16;
 		len += 16;
 	}
 	if (stdinval == -1)
 	{
-		ft_putadr_hexa_c((unsigned long)&str[size] - (unsigned long)&str[0]);
+		ft_putadr_hexa((unsigned long)&str[size] - (unsigned long)&str[0]);
 		ft_putchar('\n');
 	}
 	return (adr);

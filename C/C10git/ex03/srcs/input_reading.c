@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:06:29 by panger            #+#    #+#             */
-/*   Updated: 2023/08/25 12:04:36 by panger           ###   ########.fr       */
+/*   Updated: 2023/08/31 14:28:36 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,12 @@ int	get_c_count(char **strs, int size)
 void	read_input2(char *str, int c_mode)
 {
 	char	*str2;
+	int		len;
 
 	if (ft_strcmp(str, "-C") != 0)
 	{
 		str2 = get_str(str);
+		len = read_file(str);
 		if (str2 == NULL)
 		{
 			ft_putstr_var("hexdump: #: ", str);
@@ -72,16 +74,10 @@ void	read_input2(char *str, int c_mode)
 			return ;
 		}
 		if (c_mode >= 1)
-		{
-			ft_hexdump_c(str2, ft_strlen(str2), c_mode, -1);
-			free(str2);
-		}
+			ft_hexdump_c(str2, len, c_mode, -1);
 		else
-		{
-			ft_hexdump(str2, ft_strlen(str2), -1);
-			free(str2);
-		}
-		return ;
+			ft_hexdump(str2, len, -1);
+		free(str2);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 11:16:26 by panger            #+#    #+#             */
-/*   Updated: 2023/08/25 12:15:18 by panger           ###   ########.fr       */
+/*   Updated: 2023/08/31 12:41:21 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ void	read_file(char *str)
 			ft_putstr_err("Cannot read file.\n");
 			return ;
 		}
-		buf[char_read] = '\0';
-		ft_putstr(buf);
+		write(1, buf, char_read);
 	}
 	close(fd);
 	return ;

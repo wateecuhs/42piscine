@@ -19,7 +19,7 @@ HEADER_DIR    = includes/
 
 all: $(NAME)
 
-%.o : %.c
+%.o : %.c $(HEADER_DIR)ft.h
 	$(CC) -c $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
 
 $(NAME): $(OBJS)

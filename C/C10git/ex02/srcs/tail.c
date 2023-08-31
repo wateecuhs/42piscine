@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:50:00 by panger            #+#    #+#             */
-/*   Updated: 2023/08/25 13:13:18 by panger           ###   ########.fr       */
+/*   Updated: 2023/08/31 16:46:54 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,20 @@ int	count_file(char *str)
 
 void	find_start(char *str, int bytes, int files_taken, char *path)
 {
-	int	i;
-	int	count;
+	int	len;
 
-	i = 0;
-	count = 0;
-	while (str[i])
-		i++;
-	i = i - bytes;
+	len = count_file(path);
+	if (bytes > len)
+		bytes = len;
+	len = len - bytes;
 	if (files_taken < 0)
 		ft_putstr_var("==> # <==\n", path);
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
+	write(1, &str[len], bytes);
 	if (files_taken < -1)
 		write(1, "\n", 1);
 }
 
-char	*get_str(char *str)
+char	*get_str(char *str, char *name)
 {
 	char	*ret;
 	int		fd;
@@ -70,7 +64,8 @@ char	*get_str(char *str)
 	len = count_file(str);
 	if (len == -1)
 	{
-		ft_putstr_var("tail: cannot open '#' for reading: ", str);
+		ft_putstr(name);
+		ft_putstr_var(": cannot open '#' for reading: ", str);
 		ft_putstr(strerror(errno));
 		write(1, "\n", 1);
 		return (NULL);
@@ -103,7 +98,7 @@ void	main_loop(int argc, char **argv, int bytes, int files_taken)
 			i++;
 			continue ;
 		}
-		str = get_str(argv[i]);
+		str = get_str(argv[i], argv[0]);
 		if (str == NULL)
 		{
 			i++;
@@ -130,6 +125,8 @@ int	main(int argc, char **argv)
 	files_taken = 0;
 	bytes = read_input_bytes(argc, argv);
 	files_taken = read_input_files(argc, argv);
+	if (files_taken == 0 && bytes != -1)
+		read_stdin();
 	if (files_taken > 1)
 		files_taken = -files_taken;
 	if (bytes <= 0)

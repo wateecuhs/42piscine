@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ./srcs/basic_print.c ./srcs/c_option.c ./srcs/lib.c ./srcs/main.c ./srcs/lib2.c ./srcs/input_reading.c
+SRCS = ./srcs/basic_print.c ./srcs/c_option.c ./srcs/lib.c ./srcs/main.c ./srcs/lib2.c ./srcs/input_reading.c ./srcs/same_char_line.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 OBJS=$(SRCS:.c=.o)
@@ -19,7 +19,7 @@ HEADER_DIR    = includes/
 
 all: $(NAME)
 
-%.o : %.c
+%.o : %.c $(HEADER_DIR)ft.h
 	$(CC) -c $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
 
 $(NAME): $(OBJS)

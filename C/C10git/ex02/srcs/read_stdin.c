@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 11:50:35 by panger            #+#    #+#             */
-/*   Updated: 2023/08/25 12:08:05 by panger           ###   ########.fr       */
+/*   Updated: 2023/08/31 12:59:18 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	read_stdin(void)
 		char_read = read(0, buf, 99);
 		if (char_read == -1)
 			return ;
-		buf[char_read] = '\0';
 	}
 	return ;
 }
