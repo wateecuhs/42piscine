@@ -1,0 +1,9 @@
+Ecrire un programme qui prend en parametre 2 nombres infiniment grand et qui affiche le résultat de la multiplication des deux nombres.
+
+Exemple 
+
+input:
+./a.out 1239871982312421321412 123711231212312321321
+output:
+153386089477519966968145202373155961425252
+
