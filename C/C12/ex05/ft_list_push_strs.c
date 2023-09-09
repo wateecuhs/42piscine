@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_list_push_strs.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: wateecuhs <waticouzz@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:33:59 by panger            #+#    #+#             */
-/*   Updated: 2023/08/23 09:28:48 by panger           ###   ########.fr       */
+/*   Updated: 2023/09/09 16:14:24 by wateecuhs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_list.h"
+/* #include <stdlib.h>
+
+t_list	*ft_create_elem(void *data)
+{
+	t_list	*ret;
+
+	ret = (t_list *)malloc(sizeof(t_list));
+	ret->data = data;
+	ret->next = NULL;
+	return (ret);
+} */
 
 t_list	*ft_list_push_strs(int size, char **strs)
 {
@@ -29,3 +40,19 @@ t_list	*ft_list_push_strs(int size, char **strs)
 	}
 	return (begin_list);
 }
+/* 
+#include <stdio.h>
+int	main(int argc, char **argv)
+{
+	t_list *test;
+
+	if (argc > 2)
+	{
+		test = ft_list_push_strs(argc - 1, &argv[1]);
+		while (test)
+		{
+			printf("%s\n", (char *)test->data);
+			test = test->next;
+		}
+	}
+} */

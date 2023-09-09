@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_list_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: wateecuhs <waticouzz@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 18:20:07 by panger            #+#    #+#             */
-/*   Updated: 2023/08/21 09:21:35 by panger           ###   ########.fr       */
+/*   Updated: 2023/09/09 16:02:58 by wateecuhs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_list_size(t_list *begin_list)
 
 	count = 0;
 	head = begin_list;
-	while (head != '\0')
+	while (head)
 	{
 		head = head->next;
 		count++;

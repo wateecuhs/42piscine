@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list.h                                          :+:      :+:    :+:   */
+/*   ft_list_foreach_if.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wateecuhs <waticouzz@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 14:04:38 by panger            #+#    #+#             */
-/*   Updated: 2023/09/09 16:43:45 by wateecuhs        ###   ########.fr       */
+/*   Created: 2023/09/09 16:53:54 by wateecuhs         #+#    #+#             */
+/*   Updated: 2023/09/09 16:55:35 by wateecuhs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LIST_H
-# define FT_LIST_H
+#include "ft_list.h"
 
-typedef struct s_list{
-	void *data;
-	struct s_list *next;
-}t_list;
-
-#endif
+void	ft_list_foreach_if(t_list *begin_list, void (*f)(void *), void *data_ref, int (*cmp)())
+{
+	while (begin_list)
+	{
+		if ((*cmp)(begin_list->next, data_ref) == 0)
+			(*f)(begin_list->data);
+		begin_list = begin_list->next;
+	}
+}

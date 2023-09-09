@@ -3,19 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_list.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: wateecuhs <waticouzz@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:04:38 by panger            #+#    #+#             */
-/*   Updated: 2023/08/20 18:27:05 by panger           ###   ########.fr       */
+/*   Updated: 2023/09/09 16:48:55 by wateecuhs        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LIST_H
 # define FT_LIST_H
 
-typedef struct s_list{
+#include <stdlib.h>
+typedef struct s_list
+{
+	struct s_list *next;
 	void *data;
-	t_list *next;
-}t_list;
+} t_list;
+
+t_list	*ft_create_elem(void *data)
+{
+	t_list	*ret;
+
+	ret = (t_list *)malloc(sizeof(t_list));
+	ret->data = data;
+	ret->next = NULL;
+	return (ret);
+}
 
 #endif
